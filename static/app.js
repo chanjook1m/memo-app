@@ -1,3 +1,15 @@
+function getSelectedRadioValue1() {
+  const selectedRadio = document.querySelector('input[name="sort"]:checked');
+
+  return selectedRadio.value;
+}
+
+function getSelectedRadioValue2() {
+  const selectedRadio = document.querySelector('input[name="sort2"]:checked');
+
+  return selectedRadio.value;
+}
+
 async function editMemo(e) {
   const id = e.target.dataset.id;
   const editInput = prompt("새 값을 입력하세요");
@@ -41,7 +53,10 @@ function displayMemo(memo) {
 }
 
 async function readMemos() {
-  const res = await fetch("/api/memos");
+  const sort = getSelectedRadioValue1();
+  const by = getSelectedRadioValue2();
+  console.log(sort, by);
+  const res = await fetch(`/api/memos?sort=${sort}&by=${by}`);
   const json = await res.json();
   console.log(json);
 

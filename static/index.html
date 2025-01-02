@@ -10,6 +10,20 @@
       <label for="input">메모를 입력하세요</label>
       <input type="text" id="input" placeholder="Enter Something" required />
       <button type="submit">생성하기</button>
+
+      <label> <input type="radio" name="sort" value="asc" checked />ASC</label>
+      <label> <input type="radio" name="sort" value="desc" />DESC</label>
+      <label>
+        <input
+          type="radio"
+          name="sort2"
+          value="created"
+          checked
+        />createdAt</label
+      >
+      <label>
+        <input type="radio" name="sort2" value="alphabet" />alphabet</label
+      >
     </form>
     <ul id="memo-ul"></ul>
     <script src="app.js"></script>

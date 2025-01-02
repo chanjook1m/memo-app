@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
-
+from typing import List, Dict
 class Memo(BaseModel):
     id: int
     content: str
@@ -11,8 +11,29 @@ app = FastAPI()
 memos = []
 
 @app.get("/api/memos")
-async def get_memo():
-    return memos
+async def get_memo(sort: str, by: str) :
+    arr = []
+    if sort == "asc":
+        if by == "alphabet": 
+            # 'content' 기준 오름차순 정렬
+            arr = sorted(memos, key=lambda x: x.content)
+            
+        elif by == "created":
+            # 'id' 기준 오름차순 정렬
+            arr = sorted(memos, key=lambda x: x.id)
+            
+
+    elif sort == "desc":
+        if by == "alphabet":
+            # 'content' 기준 내림차순 정렬
+            arr = sorted(memos, key=lambda x: x.content, reverse=True)
+            
+        elif by == "created":
+            # 'id' 기준 내림차순 정렬
+            arr = sorted(memos, key=lambda x: x.id, reverse=True)
+            
+    
+    return arr
 
 
 @app.post("/api/memos")
